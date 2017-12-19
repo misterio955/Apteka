@@ -5,6 +5,11 @@
  */
 package apteka;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Basian
@@ -80,6 +85,11 @@ public class Apteka extends javax.swing.JFrame {
 
         jBtnIDleku.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBtnIDleku.setText("Wyszukaj po ID leku");
+        jBtnIDleku.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnIDlekuActionPerformed(evt);
+            }
+        });
 
         jBtnNazwa.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jBtnNazwa.setText("Wyszukaj po nazwie");
@@ -160,6 +170,16 @@ public class Apteka extends javax.swing.JFrame {
     private void jTFSzukanyLekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFSzukanyLekActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFSzukanyLekActionPerformed
+
+    private void jBtnIDlekuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIDlekuActionPerformed
+        
+        try {
+            ProbaWczytania.wczytanie("C:\\lekarstwa.txt");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jBtnIDlekuActionPerformed
 
     /**
      * @param args the command line arguments
