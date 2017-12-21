@@ -1,2 +1,16 @@
-1; Acodin; Dextromethorphani hydrobromidum; Astma, Ci��a; Przeciwb�lowe; 20.32;
-2; APAP; Paracetamol; Ci��a; Przeciwgor�czkowe; 12.99;
+1; Acodin; Dextromethorphani hydrobromidum; Astma, Ci��a; Przeciwb�lowe; 20.32;
+2; APAP; Paracetamol; Ci��a; Przeciwgor�czkowe; 12.99;
+3; 4 Flex; Hydrolizat kolagenu; Ciąża; Suplement diety; 59.99;
+4; Allegra; Feksofenadyna; Uczulenie, choroby układu krązenia; Przeciwalergiczny; 14.99;
+5; Braveran; cynk, selen, buzdyganek ziemny; brak; Suplement diety; 25.49;
+6; Acard; kwas acetylosalicylowy; astma, choroba wrzodowa, polip nosa; zmniejsza krzepliwość krwi; 8.49;
+7; Gripex Control; Paracetamol, kofeina; ciąża, schorzenie nerek; Przeciwbólowe; 6.99;
+8; Ranigast; Ranitydyna; ciąża, zaburzenie czynności nerek; hamuje wydzielanie soku żołądkowego; 14.99;
+9; Rutinoscorbin; Rutozyd, witamina C; ciąża; wspomaga układ odpornościowy; 8.99;
+10; Cynkosel Max; cynk, witamina A; brak; Suplement diety; 7.99;
+11; Septolete; tymol, olejek miętowy, mentol; cukrzyca; bakteriobójcze, miejscowo znieczulające; 10.99;
+12; Theraflu; cytrynian butamiratu; ciąża; przeciwkaszlowe; układ oddechowy; 16.49;
+13; Ranimax; Ranitydyna; ciąza, zaburzenie czynności nerek; hamuje wydzielanie soku żołądkowego; 11.99;
+14; Ale shape!; kofeina, ekstrat z guarany, ekstrat pieprzu czarnego; nadciśnienie; Suplement diety; 5.99;
+15; Ibuprom; ibuprofen; astma, ciąża; przeciwbólowe; 6.49;
+16; Nicorette; nikotyna; choroby serca, cukrzyca; zwalczanie nałogu palenia; 55.99;
