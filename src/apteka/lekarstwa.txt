@@ -1,6 +1,6 @@
-1; Acodin; Dextromethorphani hydrobromidum; Astma, Ciąża; Przeciwbólowe; 20.32;
-2; APAP; Paracetamol; Ciąża; Przeciwgorączkowe; 12.99;
-3; 4 Flex; Hydrolizat kolagenu; Ciąża; Suplement diety; 59.99;
+1; Acodin; Dextromethorphani hydrobromidum; Astma, ciąża; Przeciwbólowe; 20.32;
+2; APAP; Paracetamol; ciąża; Przeciwgorączkowe; 12.99;
+3; 4 Flex; Hydrolizat kolagenu; ciąża; Suplement diety; 59.99;
 4; Allegra; Feksofenadyna; Uczulenie, choroby układu krązenia; Przeciwalergiczny; 14.99;
 5; Braveran; cynk, selen, buzdyganek ziemny; brak; Suplement diety; 25.49;
 6; Acard; kwas acetylosalicylowy; astma, choroba wrzodowa, polip nosa; zmniejsza krzepliwość krwi; 8.49;
