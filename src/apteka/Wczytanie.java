@@ -49,7 +49,7 @@ public final class Wczytanie {
     
     public ArrayList przekazanie_elementow ()
     {
-        return Lista_elemetow;
+        return Lista_elemetow; // przekazanie
     }
 
 }
