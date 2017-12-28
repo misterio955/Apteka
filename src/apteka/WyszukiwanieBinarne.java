@@ -48,6 +48,7 @@ public class WyszukiwanieBinarne {
 
         int k = zliczenieWersow(sciezka);
         ArrayList<Integer> lista = new ArrayList<>();
+        ArrayList<String> listaLekow = new ArrayList<>();
         //int[] lista = new int[k];
         int l = 0;
         int s;
@@ -61,7 +62,7 @@ public class WyszukiwanieBinarne {
             do {
 
                 first_read = textLine.split(";");
-
+                listaLekow.add(textLine);
                 lista.add(Integer.parseInt(first_read[0]));
 
                 textLine = buffReader.readLine();//Czytanie kolejnej lini
@@ -72,7 +73,7 @@ public class WyszukiwanieBinarne {
 
                 if (lista.get(s) == x) {
                     
-                    System.out.println("Odnaleziono element " + x + " pod indeksem " + s);
+                    System.out.println(listaLekow.get(s));
 
                     return;
                 }
