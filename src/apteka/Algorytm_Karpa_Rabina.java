@@ -15,10 +15,45 @@ import java.io.IOException;
  */
 public class Algorytm_Karpa_Rabina {
 
-    private  final int r = 256;   //liczba symboli alfabetu (char 0-255)
-    private  final int q = 9551;  //możliwie duża liczba pierwsza  
+    private final int r = 511;   //liczba symboli alfabetu (char 0-255)
+    private final int q = 9551;  //możliwie duża liczba pierwsza  
+        
+        String tekst;
+        String wzorzec;
 
-    public int power_modulo_fast(int a, int b, int m) {
+        String[] first_read = null;
+        String[] second_read = null;
+   
+    
+    public void wyszukaniePrzeciwwskazania(String sciezka, String x) throws IOException {
+
+        
+
+        try (FileReader filereader = new FileReader(sciezka)) {
+            BufferedReader buffReader = new BufferedReader(filereader);
+
+            String textLine = buffReader.readLine();
+            do {
+
+                first_read = textLine.split(";");//Pierwsze rozdzielenie separatorem ";"
+                second_read = first_read[3].split(",");//Drugie rozdzielenie seperatorem ","
+                for (String item : second_read)//Pętla po elementach tablicy 
+                {
+
+                    if (karp_rabin(x, item)==true){
+                        System.out.println(textLine);
+                    }
+                }
+
+                textLine = buffReader.readLine();//Czytanie kolejnej lini
+
+            } while (textLine != null);
+            
+            
+        }
+    }
+    
+     public int power_modulo_fast(int a, int b, int m) {
         int i;
         int result = 1;
         long x = a % m;
@@ -34,44 +69,16 @@ public class Algorytm_Karpa_Rabina {
 
         return result % m;
     }
-
-    public void wyszukanieKryteria(String sciezka, String x) throws IOException {
-
-        int m, n, i, j, h1, h2, rm;
-        String tekst;
-        String wzorzec;
-
-        tekst = "";
-        wzorzec = x;
-        String[] first_read = null;
-        String[] second_read = null;
-
-        try (FileReader filereader = new FileReader(sciezka)) {
-            BufferedReader buffReader = new BufferedReader(filereader);
-
-            String textLine = buffReader.readLine();
-            do {
-
-                first_read = textLine.split(";");//Pierwsze rozdzielenie separatorem ";"
-                second_read = first_read[3].split(",");//Drugie rozdzielenie seperatorem ","
-                for (String item : second_read)//Pętla po elementach tablicy 
-                {
-
-                    tekst += item;
-                }
-
-                textLine = buffReader.readLine();//Czytanie kolejnej lini
-
-            } while (textLine != null);
-
+    public boolean karp_rabin(String x, String tekst) {
+            int m, n, i, j, h1, h2, rm;
+            wzorzec = x;
             n = tekst.length();
             m = wzorzec.length();
             h2 = 0;
             h1 = 0;
-            System.out.println(tekst);
-
-            System.out.println("Indeksy poczatkow wzorca w tekscie");
-
+            
+        if (m>n) return false;
+        
 //      algorytm Hornera do obliczenia funkcji haszujacej h(tekst[1..m])
             for (i = 0; i < m; i++) {
                 h2 = ((h2 * r) + tekst.charAt(i));
@@ -95,7 +102,7 @@ public class Algorytm_Karpa_Rabina {
                     }
                 }
                 if (j == m) {
-                    System.out.println(i + 1);
+                    return true;
                 }
                 h2 = ((h2 - tekst.charAt(i) * rm) * r + tekst.charAt(i + m));
                 h2 %= q;
@@ -111,8 +118,8 @@ public class Algorytm_Karpa_Rabina {
                 }
             }
             if (j == m) {
-                System.out.println(i + 1);
+               return true;
             }
-        }
+            return false;
     }
 }
