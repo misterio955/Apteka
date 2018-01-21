@@ -33,21 +33,13 @@ public static void WyszukiwanieKategorie (String sciezka, String Kategoria) thro
             String textLine = buffReader.readLine();
             do {
                 
-                first_read = textLine.split(";");//Pierwsze rozdzielenie separatorem ";"
+                first_read = textLine.split(";");
                 lista.add(textLine);
-                second_read = first_read[4].split(";");//Drugie rozdzielenie seperatorem ","
-                /*for (String item : first_read)//Pętla po elementach tablicy 
-                {   
-                   //System.out.print(item+" ");
-                   lista.add(item);
-                    
-                }*/
+                second_read = first_read[4].split(";");
                 for (String item2 : second_read){
-                    //System.out.print(item2+" ");
                     listaKategorie.add(item2);
                 }
-                //System.out.println();
-                textLine = buffReader.readLine();//Czytanie kolejnej lini
+                textLine = buffReader.readLine();
             } while (textLine != null);
         }
 
@@ -65,7 +57,7 @@ public static void WyszukiwanieKategorie (String sciezka, String Kategoria) thro
                 listawynik.add(-1);
             }
         }
-       //System.out.println(lista.get(15));
+       
     for (int j=0;j<lista.size();j++){
         
         if(listawynik.get(j)==-1){
