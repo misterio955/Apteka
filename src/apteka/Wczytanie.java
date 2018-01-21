@@ -70,7 +70,7 @@ public final class Wczytanie {
                     }
                 }
 
-                textLine = buffReader.readLine();//Czytanie kolejnej lini
+                textLine = buffReader.readLine();//Czytanie kolejnej lini w
             } while (textLine != null);
 
         }
