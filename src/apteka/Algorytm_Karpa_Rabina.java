@@ -8,6 +8,7 @@ package apteka;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,9 +26,9 @@ public class Algorytm_Karpa_Rabina {
         String[] second_read = null;
    
     
-    public void wyszukaniePrzeciwwskazania(String sciezka, String x) throws IOException {
+    public ArrayList wyszukaniePrzeciwwskazania(String sciezka, String x) throws IOException {
 
-        
+        ArrayList<String> wynik = new ArrayList<>();
 
         try (FileReader filereader = new FileReader(sciezka)) {
             BufferedReader buffReader = new BufferedReader(filereader);
@@ -41,7 +42,8 @@ public class Algorytm_Karpa_Rabina {
                 {
 
                     if (karp_rabin(x, item)==true){
-                        System.out.println(textLine);
+                        
+                        wynik.add(textLine);
                     }
                 }
 
@@ -51,6 +53,7 @@ public class Algorytm_Karpa_Rabina {
             
             
         }
+        return wynik;
     }
     
      public int power_modulo_fast(int a, int b, int m) {

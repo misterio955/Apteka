@@ -1,8 +1,10 @@
 package apteka;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,6 +25,25 @@ public class Apteka extends javax.swing.JFrame {
         initComponents();
     }
 
+    private void dodajWiersz(ArrayList lista) throws IOException{
+        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
+        ArrayList<String> list = lista;
+        Object rowData[] = new Object [7];
+        for (int i=0;i<list.size();i++){
+            String[] first_read = list.get(i).split(";");
+            
+            
+            rowData[0]=first_read[0];
+            rowData[1]=first_read[1];
+            rowData[2]=first_read[2];
+            rowData[3]=first_read[3];
+            rowData[4]=first_read[4];
+            rowData[5]=first_read[5];
+            rowData[6]=first_read[6];
+            model.addRow(rowData);
+        }
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,9 +61,9 @@ public class Apteka extends javax.swing.JFrame {
         jPanel_Kategoria = new javax.swing.JTabbedPane();
         jPanel_ID = new javax.swing.JTabbedPane();
         jPanelZamiennik = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jBtnWyjscie = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,7 +95,7 @@ public class Apteka extends javax.swing.JFrame {
         jPanel_NazwaLayout.setHorizontalGroup(
             jPanel_NazwaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_NazwaLayout.createSequentialGroup()
-                .addGap(0, 380, Short.MAX_VALUE)
+                .addGap(0, 882, Short.MAX_VALUE)
                 .addComponent(jButtonID, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel_NazwaLayout.setVerticalGroup(
@@ -93,19 +114,6 @@ public class Apteka extends javax.swing.JFrame {
         jZakladki.addTab("ID", jPanel_ID);
         jZakladki.addTab("Zamiennik", jPanelZamiennik);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         jBtnWyjscie.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jBtnWyjscie.setText("Wyjscie");
         jBtnWyjscie.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +121,16 @@ public class Apteka extends javax.swing.JFrame {
                 jBtnWyjscieActionPerformed(evt);
             }
         });
+
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nazwa", "Skład", "Przeciwwskazania", "Kategoria", "Cena", "Recepta"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,13 +140,11 @@ public class Apteka extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTxtFldSzukany)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jZakladki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jBtnWyjscie, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jBtnWyjscie, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2)
+                    .addComponent(jZakladki))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -138,9 +154,9 @@ public class Apteka extends javax.swing.JFrame {
                 .addComponent(jTxtFldSzukany, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jZakladki, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(jBtnWyjscie, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -152,17 +168,23 @@ public class Apteka extends javax.swing.JFrame {
 
     private void jButtonIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIDActionPerformed
         
-        
-        
-        try {
+         try {
+
+            String sciezka = "C:\\Users\\Basian\\Documents\\"
+                    + "NetBeansProjects\\Apteka\\src\\apteka\\lekarstwa.txt";
+            
             WyszukiwanieBinarne wb = new WyszukiwanieBinarne();
-            wb.wyszukanieID("C:\\lekarstwa.txt", 2);
+            dodajWiersz(wb.wyszukanieID(sciezka, 1));
+            
+            Algorytm_Karpa_Rabina akr = new Algorytm_Karpa_Rabina();
+            dodajWiersz(akr.wyszukaniePrzeciwwskazania(sciezka, "ciąża"));
+            
+            
+            
         } catch (IOException ex) {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+       
     }//GEN-LAST:event_jButtonIDActionPerformed
 
     private void jBtnWyjscieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnWyjscieActionPerformed
@@ -212,8 +234,8 @@ public class Apteka extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jPanel_ID;
     private javax.swing.JTabbedPane jPanel_Kategoria;
     private javax.swing.JPanel jPanel_Nazwa;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField jTxtFldSzukany;
     private javax.swing.JTabbedPane jZakladki;
     // End of variables declaration//GEN-END:variables

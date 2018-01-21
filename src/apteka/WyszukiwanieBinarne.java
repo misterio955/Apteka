@@ -47,12 +47,13 @@ public class WyszukiwanieBinarne {
         return Wersy;
     }
 
-    public void wyszukanieID(String sciezka, int x) throws IOException {
+    public ArrayList wyszukanieID(String sciezka, int x) throws IOException {
 
         int k = zliczenieWersow(sciezka);
         ArrayList<Integer> lista = new ArrayList<>();
         ArrayList<String> listaLekow = new ArrayList<>();
-        //int[] lista = new int[k];
+        ArrayList<String> wynik = new ArrayList<>();
+        
         int l = 0;
         int s;
         int p = k - 1;
@@ -77,10 +78,8 @@ public class WyszukiwanieBinarne {
                 
                 
                 if (lista.get(s) == x) {
-                    
-                    System.out.println(listaLekow.get(s));
-
-                    return;
+                  
+                    wynik.add(String.valueOf(listaLekow.get(s)));
                 }
 
                 if (lista.get(s) < x) {
@@ -90,5 +89,7 @@ public class WyszukiwanieBinarne {
                 }
             }
         }
+        return wynik;
     }
+  
 }
