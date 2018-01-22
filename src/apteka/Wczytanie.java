@@ -28,7 +28,7 @@ public final class Wczytanie {
             do {
 
                 first_read = textLine.split(";");//Pierwsze rozdzielenie separatorem ";"
-                second_read = first_read[3].split(",");//Drugie rozdzielenie seperatorem ","
+                second_read = first_read[2].split(",");//Drugie rozdzielenie seperatorem ","
                 for (String item : second_read)//Pętla po elementach tablicy 
                 {
                     if (abm.BM_alg(item, this.pattern) == true) {
@@ -77,6 +77,7 @@ public final class Wczytanie {
     }
 
     public ArrayList przekazanie_elementow() {
+        
         return Lista_elemetow; // przekazanie
     }
 

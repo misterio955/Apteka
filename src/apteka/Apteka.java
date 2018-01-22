@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -25,10 +26,15 @@ public class Apteka extends javax.swing.JFrame {
     }
     String sciezka = "C:\\Users\\Basian\\Documents\\"
             + "NetBeansProjects\\Apteka\\src\\apteka\\lekarstwa.txt";
-
-    private void dodajWiersz(ArrayList lista) throws IOException {
-        DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        ArrayList<String> list = lista;
+    
+    ArrayList<String> list;
+            
+    private void dodajWiersze(ArrayList lista, JTable tabela) throws IOException {
+        
+        DefaultTableModel model = (DefaultTableModel) tabela.getModel();
+        model.setRowCount(0);
+        jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        list = lista;
         Object rowData[] = new Object[7];
         for (int i = 0; i < list.size(); i++) {
             String[] first_read = list.get(i).split(";");
@@ -42,9 +48,25 @@ public class Apteka extends javax.swing.JFrame {
             rowData[6] = first_read[6];
             model.addRow(rowData);
         }
-
+        
     }
+    
+    
 
+    private String pobierzWers(int index){
+        
+        int NRwiersza = jTable.getSelectedRow();
+       
+      
+        String wiersz = list.get(NRwiersza);
+        
+           String [] first_read = wiersz.split(";");//Pierwsze rozdzielenie separatorem ";"
+           
+         
+        // System.out.println(first_read[index]);  
+         return first_read[index];  
+               
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,23 +77,24 @@ public class Apteka extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTxtSzukany = new javax.swing.JTextField();
         jZakladki = new javax.swing.JTabbedPane();
-        jPanel_ID = new javax.swing.JTabbedPane();
-        jBtnID = new javax.swing.JButton();
         jPanel_Nazwa = new javax.swing.JPanel();
+        jBtnID = new javax.swing.JButton();
+        jTxtID = new javax.swing.JTextField();
+        jPanel_Nazwa1 = new javax.swing.JPanel();
         jBtnNazwa = new javax.swing.JButton();
-        jPanel_Kategoria = new javax.swing.JTabbedPane();
-        jBtnKategoria = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jBtnSklad = new javax.swing.JButton();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jBtnPrzeciwwskazanie = new javax.swing.JButton();
-        jPanelZamiennik = new javax.swing.JTabbedPane();
-        jBtnZamiennik = new javax.swing.JButton();
+        jTxtNazwa = new javax.swing.JTextField();
+        jPanel_Nazwa2 = new javax.swing.JPanel();
+        jBtnKatgoria = new javax.swing.JButton();
+        jTxtKategoria = new javax.swing.JTextField();
         jBtnWyjscie = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTablePorownania = new javax.swing.JTable();
+        jBtnKategoria = new javax.swing.JButton();
+        jBtnPrzeciwwskazanie = new javax.swing.JButton();
+        jBtnZamiennik = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,19 +109,40 @@ public class Apteka extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTxtSzukany.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jTxtSzukany.setText("Wpisz szukany lek");
-        jTxtSzukany.setToolTipText("");
-
+        jBtnID.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jBtnID.setText("Wyszukaj lek");
         jBtnID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBtnIDActionPerformed(evt);
             }
         });
-        jPanel_ID.addTab("tab1", jBtnID);
 
-        jZakladki.addTab("ID", jPanel_ID);
+        jTxtID.setText("Wpisz id szukanego leku");
+        jTxtID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtIDActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_NazwaLayout = new javax.swing.GroupLayout(jPanel_Nazwa);
+        jPanel_Nazwa.setLayout(jPanel_NazwaLayout);
+        jPanel_NazwaLayout.setHorizontalGroup(
+            jPanel_NazwaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_NazwaLayout.createSequentialGroup()
+                .addGap(0, 578, Short.MAX_VALUE)
+                .addComponent(jTxtID, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jBtnID, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel_NazwaLayout.setVerticalGroup(
+            jPanel_NazwaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTxtID)
+            .addComponent(jBtnID, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+        );
+
+        jBtnID.getAccessibleContext().setAccessibleName("Wyszukaj lek ");
+
+        jZakladki.addTab("ID", jPanel_Nazwa);
 
         jBtnNazwa.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jBtnNazwa.setText("Wyszukaj lek");
@@ -108,65 +152,58 @@ public class Apteka extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel_NazwaLayout = new javax.swing.GroupLayout(jPanel_Nazwa);
-        jPanel_Nazwa.setLayout(jPanel_NazwaLayout);
-        jPanel_NazwaLayout.setHorizontalGroup(
-            jPanel_NazwaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_NazwaLayout.createSequentialGroup()
-                .addGap(0, 882, Short.MAX_VALUE)
+        jTxtNazwa.setText("Wpisz nazwę szukanego leku");
+        jTxtNazwa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTxtNazwaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel_Nazwa1Layout = new javax.swing.GroupLayout(jPanel_Nazwa1);
+        jPanel_Nazwa1.setLayout(jPanel_Nazwa1Layout);
+        jPanel_Nazwa1Layout.setHorizontalGroup(
+            jPanel_Nazwa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Nazwa1Layout.createSequentialGroup()
+                .addGap(0, 578, Short.MAX_VALUE)
+                .addComponent(jTxtNazwa, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jBtnNazwa, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel_NazwaLayout.setVerticalGroup(
-            jPanel_NazwaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_NazwaLayout.createSequentialGroup()
-                .addComponent(jBtnNazwa, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 39, Short.MAX_VALUE))
+        jPanel_Nazwa1Layout.setVerticalGroup(
+            jPanel_Nazwa1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTxtNazwa)
+            .addComponent(jBtnNazwa, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
         );
 
-        jBtnNazwa.getAccessibleContext().setAccessibleName("Wyszukaj lek ");
+        jZakladki.addTab("Nazwa", jPanel_Nazwa1);
 
-        jZakladki.addTab("Nazwa", jPanel_Nazwa);
-
-        jBtnKategoria.setText("Wyszukaj lek");
-        jBtnKategoria.addActionListener(new java.awt.event.ActionListener() {
+        jBtnKatgoria.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jBtnKatgoria.setText("Wyszukaj lek");
+        jBtnKatgoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnKategoriaActionPerformed(evt);
+                jBtnKatgoriaActionPerformed(evt);
             }
         });
-        jPanel_Kategoria.addTab("tab1", jBtnKategoria);
 
-        jZakladki.addTab("Kategoria", jPanel_Kategoria);
-        jPanel_Kategoria.getAccessibleContext().setAccessibleName("Kategoria");
+        jTxtKategoria.setText("Wpisz kategorię ");
 
-        jBtnSklad.setText("Wyszukaj lek");
-        jBtnSklad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnSkladActionPerformed(evt);
-            }
-        });
-        jTabbedPane1.addTab("tab1", jBtnSklad);
+        javax.swing.GroupLayout jPanel_Nazwa2Layout = new javax.swing.GroupLayout(jPanel_Nazwa2);
+        jPanel_Nazwa2.setLayout(jPanel_Nazwa2Layout);
+        jPanel_Nazwa2Layout.setHorizontalGroup(
+            jPanel_Nazwa2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_Nazwa2Layout.createSequentialGroup()
+                .addGap(0, 578, Short.MAX_VALUE)
+                .addComponent(jTxtKategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jBtnKatgoria, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel_Nazwa2Layout.setVerticalGroup(
+            jPanel_Nazwa2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTxtKategoria)
+            .addComponent(jBtnKatgoria, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+        );
 
-        jZakladki.addTab("Skład", jTabbedPane1);
-
-        jBtnPrzeciwwskazanie.setText("Wyszukaj lek");
-        jBtnPrzeciwwskazanie.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPrzeciwwskazanieActionPerformed(evt);
-            }
-        });
-        jTabbedPane2.addTab("tab1", jBtnPrzeciwwskazanie);
-
-        jZakladki.addTab("Przeciwwskazania", jTabbedPane2);
-
-        jBtnZamiennik.setText("Znajdz zamiennik");
-        jBtnZamiennik.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnZamiennikActionPerformed(evt);
-            }
-        });
-        jPanelZamiennik.addTab("tab1", jBtnZamiennik);
-
-        jZakladki.addTab("Zamiennik", jPanelZamiennik);
+        jZakladki.addTab("Kategoria", jPanel_Nazwa2);
 
         jBtnWyjscie.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jBtnWyjscie.setText("Wyjscie");
@@ -186,32 +223,78 @@ public class Apteka extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable);
 
+        jTablePorownania.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nazwa", "Skład", "Przeciwwskazania", "Kategoria", "Cena", "Recepta"
+            }
+        ));
+        jScrollPane3.setViewportView(jTablePorownania);
+
+        jBtnKategoria.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jBtnKategoria.setText("Porównaj po kategorii");
+        jBtnKategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnKategoriaActionPerformed(evt);
+            }
+        });
+
+        jBtnPrzeciwwskazanie.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jBtnPrzeciwwskazanie.setText("Porównaj po przeciwwskazaniach");
+        jBtnPrzeciwwskazanie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPrzeciwwskazanieActionPerformed(evt);
+            }
+        });
+
+        jBtnZamiennik.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jBtnZamiennik.setText("Znajdź tańszy zamiennik");
+        jBtnZamiennik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnZamiennikActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addComponent(jZakladki, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTxtSzukany)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jBtnWyjscie, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jZakladki)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jBtnKategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnPrzeciwwskazanie)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBtnZamiennik, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBtnWyjscie, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTxtSzukany, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jZakladki, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jZakladki, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(jBtnWyjscie, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnKategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnPrzeciwwskazanie, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnZamiennik, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnWyjscie, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -221,74 +304,78 @@ public class Apteka extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    private void jBtnNazwaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNazwaActionPerformed
-
-        String szukany = jTxtSzukany.getText();
-        try {
-            Wczytanie w = new Wczytanie(sciezka, szukany);
-            w.wyszukanie_kmp();
-            dodajWiersz(w.przekazanie_elementow());
-
-        } catch (IOException ex) {
-            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-    }//GEN-LAST:event_jBtnNazwaActionPerformed
-
     private void jBtnWyjscieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnWyjscieActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jBtnWyjscieActionPerformed
 
+    private void jBtnKatgoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnKatgoriaActionPerformed
+        String szukany = " "+ jTxtKategoria.getText();
+        try {
+            WyszukiwanieKategorie wk = new WyszukiwanieKategorie();
+                        dodajWiersze(wk.WyszukiwanieKategorie(sciezka, szukany),jTable);
+        }catch (IOException ex) {
+            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnKatgoriaActionPerformed
+
+    private void jBtnNazwaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNazwaActionPerformed
+         String szukany = jTxtNazwa.getText();
+        try {
+            Wczytanie w = new Wczytanie(sciezka, szukany);
+            w.wyszukanie_kmp();
+            dodajWiersze(w.przekazanie_elementow(),jTable);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBtnNazwaActionPerformed
+
     private void jBtnIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIDActionPerformed
-        int szukany = Integer.valueOf(jTxtSzukany.getText());
+
+        int szukany = Integer.valueOf(jTxtID.getText());
         WyszukiwanieBinarne wb = new WyszukiwanieBinarne();
         try {
-            dodajWiersz(wb.wyszukanieID(sciezka, szukany));
+            dodajWiersze(wb.wyszukanieID(sciezka, szukany), jTable);
         } catch (IOException ex) {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBtnIDActionPerformed
 
+    private void jTxtNazwaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtNazwaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtNazwaActionPerformed
 
     private void jBtnKategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnKategoriaActionPerformed
-       String szukany = jTxtSzukany.getText();
-//        try {
-//            WyszukiwanieKategorie wk = new WyszukiwanieKategorie(sciezka, szukany);
-//                        dodajWiersz(wk);
-//        }catch (IOException ex) {
-//            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        try {
+            WyszukiwanieKategorie wk = new WyszukiwanieKategorie();
+            dodajWiersze(wk.WyszukiwanieKategorie(sciezka, pobierzWers(4)),jTablePorownania);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jBtnKategoriaActionPerformed
 
+    private void jBtnPrzeciwwskazanieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPrzeciwwskazanieActionPerformed
+       try {
+            Algorytm_Karpa_Rabina akr = new Algorytm_Karpa_Rabina();
+            dodajWiersze(akr.wyszukaniePrzeciwwskazania(sciezka, pobierzWers(3)),jTablePorownania);
+
+        } catch (IOException ex) {
+            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_jBtnPrzeciwwskazanieActionPerformed
+
     private void jBtnZamiennikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnZamiennikActionPerformed
-       
+      
+      
+      
     }//GEN-LAST:event_jBtnZamiennikActionPerformed
 
-    private void jBtnSkladActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSkladActionPerformed
-        String szukany = jTxtSzukany.getText();
-        try {
-            Wczytanie ww = new Wczytanie(sciezka, szukany);
-            ww.porownanie_algorytm_boyer_more();
-            dodajWiersz(ww.przekazanie_elementow());
+    private void jTxtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTxtIDActionPerformed
 
-        } catch (IOException ex) {
-            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jBtnSkladActionPerformed
-
-    private void jBtnPrzeciwwskazanieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPrzeciwwskazanieActionPerformed
-        try {
-
-            String szukany = jTxtSzukany.getText();
-            Algorytm_Karpa_Rabina akr = new Algorytm_Karpa_Rabina();
-            dodajWiersz(akr.wyszukaniePrzeciwwskazania(sciezka, szukany));
-
-        } catch (IOException ex) {
-            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBtnPrzeciwwskazanieActionPerformed
 
     /**
      * @param args the command line arguments
@@ -328,21 +415,22 @@ public class Apteka extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnID;
     private javax.swing.JButton jBtnKategoria;
+    private javax.swing.JButton jBtnKatgoria;
     private javax.swing.JButton jBtnNazwa;
     private javax.swing.JButton jBtnPrzeciwwskazanie;
-    private javax.swing.JButton jBtnSklad;
     private javax.swing.JButton jBtnWyjscie;
     private javax.swing.JButton jBtnZamiennik;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTabbedPane jPanelZamiennik;
-    private javax.swing.JTabbedPane jPanel_ID;
-    private javax.swing.JTabbedPane jPanel_Kategoria;
     private javax.swing.JPanel jPanel_Nazwa;
+    private javax.swing.JPanel jPanel_Nazwa1;
+    private javax.swing.JPanel jPanel_Nazwa2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable;
-    private javax.swing.JTextField jTxtSzukany;
+    private javax.swing.JTable jTablePorownania;
+    private javax.swing.JTextField jTxtID;
+    private javax.swing.JTextField jTxtKategoria;
+    private javax.swing.JTextField jTxtNazwa;
     private javax.swing.JTabbedPane jZakladki;
     // End of variables declaration//GEN-END:variables
 
