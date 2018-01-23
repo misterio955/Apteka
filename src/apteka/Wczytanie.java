@@ -17,6 +17,10 @@ public final class Wczytanie {
         this.pattern = pattern;
     }
 
+    public void zmianapatterna(String pattern) {
+        this.pattern = pattern;
+    }
+
     public void porownanie_algorytm_boyer_more() throws IOException {
         Algorytm_Boyer_Moore abm = new Algorytm_Boyer_Moore();
         String first_read[] = null;
@@ -32,22 +36,20 @@ public final class Wczytanie {
                 for (String item : second_read)//Pętla po elementach tablicy 
                 {
                     if (abm.BM_alg(item, this.pattern) == true) {
-//                        System.out.println(textLine);
-//                        System.out.println(item);
-//                        System.out.println("Szukane słowo " + pattern);
-//                        System.out.println("udało sie znaleźć");
-                        Lista_elemetow.add(textLine);
+                        if (Lista_elemetow.isEmpty() || Lista_elemetow.indexOf(textLine) == -1) {
+                            
+                            Lista_elemetow.add(textLine);
+                        }
                     }
                 }
-
-                textLine = buffReader.readLine();//Czytanie kolejnej lini
-            } while (textLine != null);
-
+            
+            textLine = buffReader.readLine();//Czytanie kolejnej lini
         }
-
+        while (textLine != null);
+        }
     }
 
-    public void wyszukanie_kmp() throws IOException {
+public void wyszukanie_kmp() throws IOException {
         Algorytm_Knutha_Morrisa_Pratta akmp = new Algorytm_Knutha_Morrisa_Pratta();
         String first_read[] = null;
         String second_read[] = null;
@@ -62,10 +64,6 @@ public final class Wczytanie {
                 for (String item : second_read)//Pętla po elementach tablicy 
                 {
                     if (akmp.akmp(item, this.pattern) == true) {
-//                        System.out.println(textLine);
-//                        System.out.println(item);
-//                        System.out.println("Szukane słowo " + pattern);
-//                        System.out.println("udało sie znaleźć");
                         Lista_elemetow.add(textLine);
                     }
                 }
