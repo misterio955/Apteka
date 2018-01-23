@@ -23,13 +23,13 @@ public ArrayList WyszukiwanieKategorie (String sciezka, String Kategoria) throws
         
         int l;
         String kat = Kategoria;
-        ArrayList<String> listaKategorie = new ArrayList<>();
-        ArrayList<String> lista = new ArrayList<>();
-        ArrayList<String> wynik= new ArrayList<>();
-        ArrayList<Integer> listawynik= new ArrayList<>();
+        ArrayList<String> listaKategorie = new ArrayList<>();//lista kategorie leków
+        ArrayList<String> lista = new ArrayList<>();// lista leków
+        ArrayList<String> wynik= new ArrayList<>(); //lista szukanych leków 
+        ArrayList<Integer> listawynik= new ArrayList<>();// lista pomocnicza
         String first_read[] = null;
         String second_read[] = null;
-        
+        //wczytanie pliku tekstowego do dwoch ArrayList
         try (FileReader filereader = new FileReader(sciezka)) {
             BufferedReader buffReader = new BufferedReader(filereader);
 
@@ -45,7 +45,7 @@ public ArrayList WyszukiwanieKategorie (String sciezka, String Kategoria) throws
                 textLine = buffReader.readLine();
             } while (textLine != null);
         }
-       
+       //porownywanie kategorii leków do szukanej kategorii, jesli nie ma danej kategorii wypisz -1 do ArrayList, jesli tak dodaj jej indeks
        for (int i=0;i<listaKategorie.size();i++){
             String temp=(String)listaKategorie.get(i);
             if(temp.equalsIgnoreCase(kat)){
@@ -58,7 +58,7 @@ public ArrayList WyszukiwanieKategorie (String sciezka, String Kategoria) throws
                 listawynik.add(-1);
             }
         }
-       
+       //zwracanie leków o szukanej kategorii
     for (int j=0;j<lista.size();j++){
         
         if(listawynik.get(j)==-1){
