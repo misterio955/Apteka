@@ -25,7 +25,8 @@ public class Algorytm_Karpa_Rabina {
         String[] first_read = null;
         String[] second_read = null;
    
-    
+    //metoda do prownania przeciwwskazan
+        // w parametrach podajemy sciezke oraz porownywane przeciwskazanie
     public ArrayList wyszukaniePrzeciwwskazania(String sciezka, String x) throws IOException {
 
         ArrayList<String> wynik = new ArrayList<>();
@@ -38,16 +39,18 @@ public class Algorytm_Karpa_Rabina {
 
                 first_read = textLine.split(";");//Pierwsze rozdzielenie separatorem ";"
                 second_read = first_read[3].split(",");//Drugie rozdzielenie seperatorem ","
-                for (String item : second_read)//Pętla po elementach tablicy 
+                for (String item : second_read) 
                 {
 
+                    //sprawdzenie w kazdym wersie algorytmem karpa rabina czy
+                    // "item" czyli nas wzorzec znajduje sie w ciagu nakow wersu
                     if (karp_rabin(x, item)==true){
                         
                         wynik.add(textLine);
                     }
                 }
 
-                textLine = buffReader.readLine();//Czytanie kolejnej lini
+                textLine = buffReader.readLine();
 
             } while (textLine != null);
             
@@ -56,7 +59,9 @@ public class Algorytm_Karpa_Rabina {
         return wynik;
     }
     
-     public int power_modulo_fast(int a, int b, int m) {
+    
+    //funkcja mieszajaca
+    public int power_modulo_fast(int a, int b, int m) {
         int i;
         int result = 1;
         long x = a % m;
@@ -72,6 +77,9 @@ public class Algorytm_Karpa_Rabina {
 
         return result % m;
     }
+    
+    // algorytm karpa rabina zwraca wartosc logiczna w zaleznosci od
+    // znalezcionego podciagu  "m" w ciagu "n"
     public boolean karp_rabin(String x, String tekst) {
             int m, n, i, j, h1, h2, rm;
             wzorzec = x;

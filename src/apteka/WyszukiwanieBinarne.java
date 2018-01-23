@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class WyszukiwanieBinarne {
     
     
-    
+    //metoda do zliczania wszystkich wersow w pliku z lekarstwami
     public int zliczenieWersow(String sciezka_Pliku) throws IOException {
 
         FileReader fr = null;
@@ -47,10 +47,12 @@ public class WyszukiwanieBinarne {
         return Wersy;
     }
 
+     //metoda do wyszukania po ID leku za pomoca wyszukiwania binarnego,
+     // w parametrach podajemy sciezke oraz szukane ID
     public ArrayList wyszukanieID(String sciezka, int x) throws IOException {
 
         int k = zliczenieWersow(sciezka);
-        ArrayList<Integer> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>(); 
         ArrayList<String> listaLekow = new ArrayList<>();
         ArrayList<String> wynik = new ArrayList<>();
         
@@ -77,7 +79,7 @@ public class WyszukiwanieBinarne {
                 s = (l + p) / 2;    //przeszukiwanie binarne
                 
                 
-                if (lista.get(s) == x) {
+                if (lista.get(s) == x) { //jesli wynik jest poprawny dodajemy do listy wynik
                   
                     wynik.add(String.valueOf(listaLekow.get(s)));
                 }
@@ -89,7 +91,7 @@ public class WyszukiwanieBinarne {
                 }
             }
         }
-        return wynik;
+        return wynik; 
     }
   
 }

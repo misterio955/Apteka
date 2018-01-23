@@ -25,17 +25,20 @@ public class Apteka extends javax.swing.JFrame {
         initComponents();
     }
     String sciezka = "C:\\Users\\Basian\\Documents\\"
-            + "NetBeansProjects\\Apteka\\src\\apteka\\lekarstwa.txt";
+            + "NetBeansProjects\\Apteka\\src\\apteka\\lekarstwa.txt";  //sciezka dokumenty z lekami
     
-    ArrayList<String> list;
-            
-    private void dodajWiersze(ArrayList lista, JTable tabela) throws IOException {
+    ArrayList<String> list;    
+      
+    //metoda do dodawania wersow w tabeli, w parametrach podajemy arrayliste z metod ...
+    //..wyszukiwania oraz tabele do ktorej zostana dodane wersy
+    
+    private void dodajWiersze(ArrayList lista, JTable tabela) throws IOException { 
         
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
-        model.setRowCount(0);
+        model.setRowCount(0);                                                 //czyszczenie tabeli
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         list = lista;
-        Object rowData[] = new Object[7];
+        Object rowData[] = new Object[7];                              //uzupelnianie tabeli wierszami 
         for (int i = 0; i < list.size(); i++) {
             String[] first_read = list.get(i).split(";");
 
@@ -52,18 +55,16 @@ public class Apteka extends javax.swing.JFrame {
     }
     
     
-
+//metoda do pobierania numeru wersu z pliku z lekami
+    // w parematrze podajemy index danej, po ktorym bedziemy porownywac dane do drugiej tabeli
     private String pobierzWers(int index){
         
         int NRwiersza = jTable.getSelectedRow();
        
-      
         String wiersz = list.get(NRwiersza);
         
-           String [] first_read = wiersz.split(";");//Pierwsze rozdzielenie separatorem ";"
-           
-         
-        // System.out.println(first_read[index]);  
+        String [] first_read = wiersz.split(";");
+          
          return first_read[index];  
                
     }
@@ -92,7 +93,7 @@ public class Apteka extends javax.swing.JFrame {
         jTable = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePorownania = new javax.swing.JTable();
-        jBtnKategoria = new javax.swing.JButton();
+        jBtnPorownajKategoria = new javax.swing.JButton();
         jBtnPrzeciwwskazanie = new javax.swing.JButton();
         jBtnZamiennik = new javax.swing.JButton();
 
@@ -233,11 +234,11 @@ public class Apteka extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jTablePorownania);
 
-        jBtnKategoria.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jBtnKategoria.setText("Porównaj po kategorii");
-        jBtnKategoria.addActionListener(new java.awt.event.ActionListener() {
+        jBtnPorownajKategoria.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jBtnPorownajKategoria.setText("Porównaj po kategorii");
+        jBtnPorownajKategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnKategoriaActionPerformed(evt);
+                jBtnPorownajKategoriaActionPerformed(evt);
             }
         });
 
@@ -271,7 +272,7 @@ public class Apteka extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jBtnKategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jBtnPorownajKategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jBtnPrzeciwwskazanie)
                                 .addGap(18, 18, 18)
@@ -288,7 +289,7 @@ public class Apteka extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnKategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnPorownajKategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnPrzeciwwskazanie, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnZamiennik, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -308,6 +309,7 @@ public class Apteka extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jBtnWyjscieActionPerformed
 
+    //przycisk do wyszukiwania po kategorii
     private void jBtnKatgoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnKatgoriaActionPerformed
         String szukany = " "+ jTxtKategoria.getText();
         try {
@@ -317,7 +319,7 @@ public class Apteka extends javax.swing.JFrame {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBtnKatgoriaActionPerformed
-
+//przycisk do wyszukiwania po nazwie
     private void jBtnNazwaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNazwaActionPerformed
          String szukany = jTxtNazwa.getText();
         try {
@@ -329,7 +331,7 @@ public class Apteka extends javax.swing.JFrame {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBtnNazwaActionPerformed
-
+//przycisk do wyszukiwania po ID
     private void jBtnIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIDActionPerformed
 
         int szukany = Integer.valueOf(jTxtID.getText());
@@ -345,16 +347,20 @@ public class Apteka extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtNazwaActionPerformed
 
-    private void jBtnKategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnKategoriaActionPerformed
+    //przycisk do porownania po kategorii
+    private void jBtnPorownajKategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPorownajKategoriaActionPerformed
         try {
             WyszukiwanieKategorie wk = new WyszukiwanieKategorie();
+            // metoda pobierzWers() pobiera nam nazwe kategorii z wybranego kliknieciem wersu
+            // metoda WyszukiwanieKategorie() wyszukujemy leki z podanej sciezki ze zwrocona wyzej kategorią
+            // metoda dodajWiersze() dodajemy wyszukane wersy do tabeli jTablePorownane(nizsza tabela)
             dodajWiersze(wk.WyszukiwanieKategorie(sciezka, pobierzWers(4)),jTablePorownania);
 
         } catch (IOException ex) {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnKategoriaActionPerformed
-
+    }//GEN-LAST:event_jBtnPorownajKategoriaActionPerformed
+//przycisk do porownania po przeciwwksazaniach
     private void jBtnPrzeciwwskazanieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPrzeciwwskazanieActionPerformed
        try {
             Algorytm_Karpa_Rabina akr = new Algorytm_Karpa_Rabina();
@@ -365,7 +371,7 @@ public class Apteka extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jBtnPrzeciwwskazanieActionPerformed
-
+//przycisk do znaleznienia tanszego zamiennika
     private void jBtnZamiennikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnZamiennikActionPerformed
       
       
@@ -414,9 +420,9 @@ public class Apteka extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnID;
-    private javax.swing.JButton jBtnKategoria;
     private javax.swing.JButton jBtnKatgoria;
     private javax.swing.JButton jBtnNazwa;
+    private javax.swing.JButton jBtnPorownajKategoria;
     private javax.swing.JButton jBtnPrzeciwwskazanie;
     private javax.swing.JButton jBtnWyjscie;
     private javax.swing.JButton jBtnZamiennik;

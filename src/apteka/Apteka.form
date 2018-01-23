@@ -50,7 +50,7 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jBtnKategoria" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="jBtnPorownajKategoria" min="-2" pref="200" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jBtnPrzeciwwskazanie" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -73,7 +73,7 @@
               <Component id="jScrollPane2" min="-2" pref="171" max="-2" attributes="0"/>
               <EmptySpace pref="24" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jBtnKategoria" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="jBtnPorownajKategoria" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="jBtnPrzeciwwskazanie" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="jBtnZamiennik" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
@@ -386,7 +386,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jBtnKategoria">
+    <Component class="javax.swing.JButton" name="jBtnPorownajKategoria">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="1"/>
@@ -394,7 +394,7 @@
         <Property name="text" type="java.lang.String" value="Por&#xf3;wnaj po kategorii"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnKategoriaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnPorownajKategoriaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnPrzeciwwskazanie">
