@@ -26,18 +26,17 @@ public class Apteka extends javax.swing.JFrame {
     }
     String sciezka = "C:\\Users\\Exatros\\Documents\\"
             + "NetBeansProjects\\Apteka\\src\\apteka\\lekarstwa.txt";  //sciezka dokumenty z lekami
-    
-    ArrayList<String> list;    
-      
+
+    ArrayList<String> list;
+
     //metoda do dodawania wersow w tabeli, w parametrach podajemy arrayliste z metod ...
     //..wyszukiwania oraz tabele do ktorej zostana dodane wersy
-    
-    private void dodajWiersze(ArrayList lista, JTable tabela) throws IOException { 
-        
+    private void dodajWiersze(ArrayList lista, JTable tabela) throws IOException {
+
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setRowCount(0);                                                 //czyszczenie tabeli
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        
+
         list = lista;
         Object rowData[] = new Object[7];                              //uzupelnianie tabeli wierszami 
         for (int i = 0; i < list.size(); i++) {
@@ -52,23 +51,23 @@ public class Apteka extends javax.swing.JFrame {
             rowData[6] = first_read[6];
             model.addRow(rowData);
         }
-        
+
     }
-    
-    
+
 //metoda do pobierania numeru wersu z pliku z lekami
     // w parematrze podajemy index danej, po ktorym bedziemy porownywac dane do drugiej tabeli
-    private String pobierzWers(int index){
-        
+    private String pobierzWers(int index) {
+
         int NRwiersza = jTable.getSelectedRow();
-       
+
         String wiersz = list.get(NRwiersza);
-        
-        String [] first_read = wiersz.split(";");
-          
-         return first_read[index];  
-               
+
+        String[] first_read = wiersz.split(";");
+
+        return first_read[index];
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -312,21 +311,21 @@ public class Apteka extends javax.swing.JFrame {
 
     //przycisk do wyszukiwania po kategorii
     private void jBtnKatgoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnKatgoriaActionPerformed
-        String szukany = " "+ jTxtKategoria.getText();
+        String szukany = " " + jTxtKategoria.getText();
         try {
             WyszukiwanieKategorie wk = new WyszukiwanieKategorie();
-                        dodajWiersze(wk.WyszukiwanieKategorie(sciezka, szukany),jTable);
-        }catch (IOException ex) {
+            dodajWiersze(wk.WyszukiwanieKategorie(sciezka, szukany), jTable);
+        } catch (IOException ex) {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jBtnKatgoriaActionPerformed
 //przycisk do wyszukiwania po nazwie
     private void jBtnNazwaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNazwaActionPerformed
-         String szukany = jTxtNazwa.getText();
+        String szukany = jTxtNazwa.getText();
         try {
             Wczytanie w = new Wczytanie(sciezka, szukany);
             w.wyszukanie_kmp();
-            dodajWiersze(w.przekazanie_elementow(),jTable);
+            dodajWiersze(w.przekazanie_elementow(), jTable);
 
         } catch (IOException ex) {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
@@ -352,13 +351,12 @@ public class Apteka extends javax.swing.JFrame {
     private void jBtnPorownajSkladActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPorownajSkladActionPerformed
         try {
             String[] ps = pobierzWers(2).split(",");
-            Wczytanie porownanie = new Wczytanie(sciezka,"");
-            
-            for (int i = 0; i < ps.length;i++)
-            {   
+            Wczytanie porownanie = new Wczytanie(sciezka, "");
+            //Petla ktora wykonuje sie tyle razy ile jest skladnikow do porownania
+            for (int i = 0; i < ps.length; i++) {
                 porownanie.zmianapatterna(ps[i]);
                 porownanie.porownanie_algorytm_boyer_more();
-                
+
             }
             dodajWiersze(porownanie.przekazanie_elementow(), jTablePorownania);
 
@@ -368,31 +366,57 @@ public class Apteka extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnPorownajSkladActionPerformed
 //przycisk do porownania po przeciwwksazaniach
     private void jBtnPrzeciwwskazanieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPrzeciwwskazanieActionPerformed
-       try {
-           String[] pw = pobierzWers(3).split(",");
-           Algorytm_Karpa_Rabina akr = new Algorytm_Karpa_Rabina(sciezka);
-           for(int i = 0; i < pw.length ; i++){
-               
-               akr.wyszukaniePrzeciwwskazania(pw[i]);
-           }
-            dodajWiersze(akr.przekazanie_elementow(),jTablePorownania);
+        try {
+            String[] pw = pobierzWers(3).split(",");
+            Algorytm_Karpa_Rabina akr = new Algorytm_Karpa_Rabina(sciezka);
+            //Petla ktora wykonuje tyle razy ile jest przeciwskazan
+            for (int i = 0; i < pw.length; i++) {
+
+                akr.wyszukaniePrzeciwwskazania(pw[i]);
+            }
+            dodajWiersze(akr.przekazanie_elementow(), jTablePorownania);
 
         } catch (IOException ex) {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_jBtnPrzeciwwskazanieActionPerformed
 //przycisk do znaleznienia tanszego zamiennika
     private void jBtnZamiennikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnZamiennikActionPerformed
-      
-      
-      
+
+        try {
+            ArrayList<String> temp;
+            WyszukiwanieKategorie wk = new WyszukiwanieKategorie();           
+            temp = wk.WyszukiwanieKategorie(sciezka,pobierzWers(4));
+            String tab[];
+            ArrayList<Integer> numery_indekow_do_usuniecia = new ArrayList<>();
+            
+            //Petla ktora szuka tanszych zamienikow po cenie
+            for(String item : temp)
+            {   
+                tab = item.split(";");
+                if(Float.valueOf(tab[5]) > Float.valueOf(pobierzWers(5)))
+                {
+                    numery_indekow_do_usuniecia.add(Integer.valueOf(tab[0]));
+                }
+                
+            }
+            //Petla do usowania drozszych produktow
+            for(int item : numery_indekow_do_usuniecia)
+            {
+                temp.remove(item);
+            }
+            
+            
+            dodajWiersze(temp, jTablePorownania);
+        } catch (IOException ex) {
+            Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jBtnZamiennikActionPerformed
 
     private void jTxtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtIDActionPerformed
-
 
     /**
      * @param args the command line arguments
