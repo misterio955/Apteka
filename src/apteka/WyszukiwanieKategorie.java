@@ -6,9 +6,11 @@
 package apteka;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,6 +46,11 @@ public ArrayList WyszukiwanieKategorie (String sciezka, String Kategoria) throws
                 }
                 textLine = buffReader.readLine();
             } while (textLine != null);
+        }
+        catch (FileNotFoundException e) {
+          
+            JOptionPane.showMessageDialog(null, "Brak odpowiedniej scieżki pliku");
+            System.exit(1);
         }
        //porownywanie kategorii leków do szukanej kategorii, jesli nie ma danej kategorii wypisz -1 do ArrayList, jesli tak dodaj jej indeks
        for (int i=0;i<listaKategorie.size();i++){

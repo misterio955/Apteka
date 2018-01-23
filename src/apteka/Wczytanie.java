@@ -1,9 +1,11 @@
 package apteka;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public final class Wczytanie {
 
@@ -71,6 +73,11 @@ public void wyszukanie_kmp() throws IOException {
                 textLine = buffReader.readLine();//Czytanie kolejnej lini w
             } while (textLine != null);
 
+        }
+        catch (FileNotFoundException e) {
+          
+            JOptionPane.showMessageDialog(null, "Brak odpowiedniej scieżki pliku");
+            System.exit(1);
         }
     }
 

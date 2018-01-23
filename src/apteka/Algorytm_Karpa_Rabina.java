@@ -6,9 +6,11 @@
 package apteka;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,6 +66,11 @@ public class Algorytm_Karpa_Rabina {
 
             } while (textLine != null);
 
+        }
+        catch (FileNotFoundException e) {
+          
+            JOptionPane.showMessageDialog(null, "Brak odpowiedniej scieżki pliku");
+            System.exit(1);
         }
     }
 

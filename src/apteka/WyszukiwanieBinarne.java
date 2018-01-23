@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,7 +29,8 @@ public class WyszukiwanieBinarne {
         try {
             fr = new FileReader(sciezka_Pliku);
         } catch (FileNotFoundException e) {
-            System.out.println("BŁĄD PRZY OTWIERANIU PLIKU!");
+          
+            JOptionPane.showMessageDialog(null, "Brak odpowiedniej scieżki pliku");
             System.exit(1);
         }
 
@@ -41,7 +43,7 @@ public class WyszukiwanieBinarne {
                 Wersy++;   //   SUMOWANIE WERSOW
             }
         } catch (IOException e) {
-            System.out.println("BŁĄD ODCZYTU Z PLIKU!");
+            JOptionPane.showMessageDialog(null, "Brak odpowiedniej scieżki pliku");
             System.exit(2);
         }
         return Wersy;
