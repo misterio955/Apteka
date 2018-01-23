@@ -1,10 +1,10 @@
-1; Acodin; Dextromethorphani hydrobromidum; Astma, ciąża; Przeciwbólowe; 20.32; tak;
+1; Acodin; Dextromethorphani hydrobromidum; astma, ciąża; Przeciwbólowe; 20.32; tak;
 2; APAP; Paracetamol; ciąża; Przeciwgorączkowe; 12.99; nie;
 3; 4 Flex; Hydrolizat kolagenu; ciąża; Suplement diety; 59.99; nie;
 4; Allegra; Feksofenadyna; Uczulenie, choroby układu krązenia; Przeciwalergiczny; 14.99; nie;
 5; Braveran; cynk, selen, buzdyganek ziemny; brak; Suplement diety; 25.49; nie;
 6; Acard; kwas acetylosalicylowy; astma, choroba wrzodowa, polip nosa; Kardiologia; 8.49; tak;
-7; Gripex Control; Paracetamol, kofeina; ciąża, schorzenie nerek; Przeciwbólowe; 6.99; tak;
+7; Gripex Control; paracetamol, kofeina; ciąża, schorzenie nerek; Przeciwbólowe; 6.99; tak;
 8; Ranigast; Ranitydyna; ciąża, zaburzenie czynności nerek; Przewód pokarmowy i metabolizm; 14.99; nie;
 9; Rutinoscorbin; Rutozyd, witamina C; ciąża; Suplement diety; 8.99; nie;
 10; Cynkosel Max; cynk, witamina A; brak; Suplement diety; 7.99; tak;
