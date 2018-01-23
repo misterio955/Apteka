@@ -391,10 +391,10 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Por&#xf3;wnaj po kategorii"/>
+        <Property name="text" type="java.lang.String" value="Por&#xf3;wnaj po sk&#x142;adzie"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnPorownajKategoriaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnPorownajSkladActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnPrzeciwwskazanie">

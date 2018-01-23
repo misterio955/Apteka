@@ -24,7 +24,7 @@ public class Apteka extends javax.swing.JFrame {
     public Apteka() {
         initComponents();
     }
-    String sciezka = "C:\\Users\\Basian\\Documents\\"
+    String sciezka = "C:\\Users\\Exatros\\Documents\\"
             + "NetBeansProjects\\Apteka\\src\\apteka\\lekarstwa.txt";  //sciezka dokumenty z lekami
     
     ArrayList<String> list;    
@@ -37,6 +37,7 @@ public class Apteka extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tabela.getModel();
         model.setRowCount(0);                                                 //czyszczenie tabeli
         jTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        
         list = lista;
         Object rowData[] = new Object[7];                              //uzupelnianie tabeli wierszami 
         for (int i = 0; i < list.size(); i++) {
@@ -235,10 +236,10 @@ public class Apteka extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTablePorownania);
 
         jBtnPorownajKategoria.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        jBtnPorownajKategoria.setText("Porównaj po kategorii");
+        jBtnPorownajKategoria.setText("Porównaj po składzie");
         jBtnPorownajKategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPorownajKategoriaActionPerformed(evt);
+                jBtnPorownajSkladActionPerformed(evt);
             }
         });
 
@@ -347,24 +348,34 @@ public class Apteka extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTxtNazwaActionPerformed
 
-    //przycisk do porownania po kategorii
-    private void jBtnPorownajKategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPorownajKategoriaActionPerformed
+    //przycisk do porownania składu
+    private void jBtnPorownajSkladActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPorownajSkladActionPerformed
         try {
-            WyszukiwanieKategorie wk = new WyszukiwanieKategorie();
-            // metoda pobierzWers() pobiera nam nazwe kategorii z wybranego kliknieciem wersu
-            // metoda WyszukiwanieKategorie() wyszukujemy leki z podanej sciezki ze zwrocona wyzej kategorią
-            // metoda dodajWiersze() dodajemy wyszukane wersy do tabeli jTablePorownane(nizsza tabela)
-            dodajWiersze(wk.WyszukiwanieKategorie(sciezka, pobierzWers(4)),jTablePorownania);
+            String[] ps = pobierzWers(2).split(",");
+            Wczytanie porownanie = new Wczytanie(sciezka,"");
+            
+            for (int i = 0; i < ps.length;i++)
+            {   
+                porownanie.zmianapatterna(ps[i]);
+                porownanie.porownanie_algorytm_boyer_more();
+                
+            }
+            dodajWiersze(porownanie.przekazanie_elementow(), jTablePorownania);
 
         } catch (IOException ex) {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jBtnPorownajKategoriaActionPerformed
+    }//GEN-LAST:event_jBtnPorownajSkladActionPerformed
 //przycisk do porownania po przeciwwksazaniach
     private void jBtnPrzeciwwskazanieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPrzeciwwskazanieActionPerformed
        try {
-            Algorytm_Karpa_Rabina akr = new Algorytm_Karpa_Rabina();
-            dodajWiersze(akr.wyszukaniePrzeciwwskazania(sciezka, pobierzWers(3)),jTablePorownania);
+           String[] pw = pobierzWers(3).split(",");
+           Algorytm_Karpa_Rabina akr = new Algorytm_Karpa_Rabina(sciezka);
+           for(int i = 0; i < pw.length ; i++){
+               
+               akr.wyszukaniePrzeciwwskazania(pw[i]);
+           }
+            dodajWiersze(akr.przekazanie_elementow(),jTablePorownania);
 
         } catch (IOException ex) {
             Logger.getLogger(Apteka.class.getName()).log(Level.SEVERE, null, ex);
